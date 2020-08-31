@@ -25,7 +25,10 @@
         "cordova",
         "ionic"
     ],
-    "platforms": ["android", "ios"],
+    "platforms": [
+        "android",
+        "ios"
+    ],
     "devDependencies": {
         "@types/cordova": "0.0.34",
         "prettier": "^2.0.5",
@@ -33,9 +36,9 @@
         "tslint-microsoft-contrib": "^6.2.0",
         "typescript": "^3.9.3"
     },
-    "dependencies": {
-        "@angular/core": "^9.1.9",
-        "@ionic-native/core": "^5.26.0",
+    "peerDependencies": {
+        "@angular/core": "^9.1.9 || ^10.0.0",
+        "@ionic-native/core": "^5.20.0",
         "rxjs": "^6.5.5"
     }
 }
