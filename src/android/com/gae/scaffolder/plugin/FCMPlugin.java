@@ -1,5 +1,6 @@
 package com.gae.scaffolder.plugin;
 
+import androidx.core.app.NotificationManagerCompat;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.util.Log;
@@ -137,6 +138,8 @@ public class FCMPlugin extends CordovaPlugin {
                 });
             } else if (action.equals("deleteInstanceId")) {
                 this.deleteInstanceId(callbackContext);
+            } else if (action.equals("hasPermission")) {
+                this.hasPermission(callbackContext);
             } else {
                 callbackContext.error("Method not found");
                 return false;
@@ -230,6 +233,20 @@ public class FCMPlugin extends CordovaPlugin {
         });
     }
 
+    private void hasPermission(final CallbackContext callbackContext) {
+        cordova.getThreadPool().execute(new Runnable() {
+            public void run() {
+                try {
+                    NotificationManagerCompat notificationManagerCompat =
+                        NotificationManagerCompat.from(cordova.getActivity().getApplicationContext());
+                    callbackContext.success(notificationManagerCompat.areNotificationsEnabled() ? 1 : 0);
+                } catch (Exception e) {
+                    callbackContext.error(e.getMessage());
+                }
+            }
+        });
+    }
+
     private JSONObject exceptionToJson(final Exception exception) throws JSONException {
         return new JSONObject() {
             {
@@ -266,11 +283,14 @@ public class FCMPlugin extends CordovaPlugin {
         Log.d(TAG, "\tSent event: " + eventName + " with " + stringifiedJSONValue);
     }
 
-    public static void sendPushPayload(Map<String, Object> payload) {
-        Log.d(TAG, "==> FCMPlugin sendPushPayload");
+    public static void setInitialPushPayload(Map<String, Object> payload) {
         if(initialPushPayload == null) {
             initialPushPayload = payload;
         }
+    }
+
+    public static void sendPushPayload(Map<String, Object> payload) {
+        Log.d(TAG, "==> FCMPlugin sendPushPayload");
         try {
             JSONObject jo = new JSONObject();
             for (String key : payload.keySet()) {

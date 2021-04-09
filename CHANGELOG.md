@@ -2,6 +2,37 @@
 
 ## Version 7
 
+### Version 7.8.0 (03/02/2020)
+
+- IOS_FIREBASE_MESSAGING_VERSION upgraded to 7.4.0;
+- FCM.hasPermission now supports Android;
+- On iOS, getToken will now wait until fcm token is defined to return it;
+- FCM.getInitialPushPayload now uses UTF8 instead of ISOLatin;
+
+### Version 7.7.0 (11/12/2020)
+
+Downgraded Cordova and Cordova-Android minimal required versions.
+
+### Version 7.6.1 (11/12/2020)
+
+Fixed auto install of ionic-specific dependencies on Windows
+
+### Version 7.6.0 (08/11/2020)
+
+Added IOS_FIREBASE_MESSAGING_VERSION plugin variable to force a fixed Firebase/Messaging pod version.
+
+### Version 7.5.0 (08/11/2020)
+
+For pure Cordova projects, ionic dependencies are skipped for "ionic", "ionic/ngx" and "ionic/v4".
+
+### Version 7.4.0 (01/11/2020)
+
+Upgraded Android and Node depenencies.
+
+### Version 7.3.1 (06/09/2020)
+
+Android: Avoided setting initialPushPayload from a non-tapped notification.
+
 ### Version 7.3.0 (30/08/2020)
 
 Removed optional Firebase/Analytics iOS dependency.
